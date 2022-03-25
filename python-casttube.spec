@@ -9,7 +9,7 @@
 Summary:	casttube provides a way to interact with the Youtube Chromecast api
 Name:		python-%{module}
 Version:	0.2.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Libraries/Python
 Source0:	https://pypi.debian.net/casttube/%{pypi_name}-%{version}.tar.gz
