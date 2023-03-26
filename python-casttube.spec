@@ -1,19 +1,21 @@
+#
 # Conditional build:
-%bcond_without	tests	# unit tests
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
 %define		module		casttube
 %define		egg_name	casttube
 %define		pypi_name	casttube
-Summary:	casttube provides a way to interact with the Youtube Chromecast api
+Summary:	casttube - a way to interact with the Youtube Chromecast API
+Summary(pl.UTF-8):	casttube - sposób interakcji z API Youtube Chromecast
 Name:		python-%{module}
-Version:	0.2.0
-Release:	5
+Version:	0.2.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
-Source0:	https://pypi.debian.net/casttube/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	4bb24ba1639d16c8fa367537bf3b88a6
+#Source0Download: https://pypi.org/simple/casttube/
+Source0:	https://files.pythonhosted.org/packages/source/c/casttube/%{pypi_name}-%{version}.tar.gz
+# Source0-md5:	37f86084a36e0dbd72d45b0452b4b676
 URL:		https://pypi.org/project/casttube/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -30,7 +32,7 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-casttube provides a way to interact with the Youtube Chromecast api.
+casttube provides a way to interact with the Youtube Chromecast API.
 
 Features:
 - Play video
@@ -40,13 +42,25 @@ Features:
 - Remove video
 - Clear the entire queue
 
+%description -l pl.UTF-8
+casttube udostępnia sposób interakcji z API Youtube Chromecast.
+
+Możliwości:
+- odtwarzanie filmów
+- odtwarzanie z listy
+- dodawanie filmów na końcu kolejki odtwarzania
+- odtwarzanie następnego filmu
+- usuwanie filmu
+- czyszczenie całej kolejki
+
 %package -n python3-%{module}
-Summary:	casttube provides a way to interact with the Youtube Chromecast api
+Summary:	casttube - a way to interact with the Youtube Chromecast API
+Summary(pl.UTF-8):	casttube - sposób interakcji z API Youtube Chromecast
 Group:		Libraries/Python
 Requires:	python3-modules
 
 %description -n python3-%{module}
-casttube provides a way to interact with the Youtube Chromecast api.
+casttube provides a way to interact with the Youtube Chromecast API.
 
 Features:
 - Play video
@@ -55,17 +69,28 @@ Features:
 - Play next
 - Remove video
 - Clear the entire queue
+
+%description -n python3-%{module} -l pl.UTF-8
+casttube udostępnia sposób interakcji z API Youtube Chromecast.
+
+Możliwości:
+- odtwarzanie filmów
+- odtwarzanie z listy
+- dodawanie filmów na końcu kolejki odtwarzania
+- odtwarzanie następnego filmu
+- usuwanie filmu
+- czyszczenie całej kolejki
 
 %prep
 %setup -q -n %{pypi_name}-%{version}
 
 %build
 %if %{with python2}
-%py_build %{?with_tests:test}
+%py_build
 %endif
 
 %if %{with python3}
-%py3_build %{?with_tests:test}
+%py3_build
 %endif
 
 %install
@@ -85,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc README.md
+%doc LICENSE README.md
 %{py_sitescriptdir}/%{module}
 %{py_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
 %endif
@@ -93,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc README.md
+%doc LICENSE README.md
 %{py3_sitescriptdir}/%{module}
 %{py3_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
 %endif
