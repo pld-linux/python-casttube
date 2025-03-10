@@ -10,7 +10,7 @@ Summary:	casttube - a way to interact with the Youtube Chromecast API
 Summary(pl.UTF-8):	casttube - sposób interakcji z API Youtube Chromecast
 Name:		python-%{module}
 Version:	0.2.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/casttube/
